@@ -1,7 +1,6 @@
-package org.upe.business;
+package org.upe.model;
 
 import java.util.Date;
-import org.upe.model.Usuario;
 
 
 public class IndicadorBiomedico {

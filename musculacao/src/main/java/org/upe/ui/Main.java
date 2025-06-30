@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import org.upe.business.IndicadorBiomedico;
+
+import org.upe.model.IndicadorBiomedico;
 import org.upe.model.Usuario;
+import org.upe.ui.VerRelatorio;
 
 public class Main {
     public static void main(String[] args) {
@@ -56,7 +58,9 @@ public class Main {
                     System.out.println("Indicadores cadastrados!");
                     break;
                 case 3:
-                    System.out.println("Relatórios");
+                    System.out.println("Ver Relatórios");
+                    VerRelatorio verRelatorio = new VerRelatorio();
+                    verRelatorio.visualizar(indicadores, scanner);
                     break;
                 case 4:
                     System.out.println("Fechando programa");

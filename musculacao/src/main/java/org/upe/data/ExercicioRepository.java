@@ -1,4 +1,4 @@
-
+package org.upe.data;
 import org.upe.model.Exercicio;
 
 import java.io.*;

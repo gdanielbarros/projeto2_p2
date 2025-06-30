@@ -30,6 +30,12 @@ public class Main {
                 case 4:
                     System.out.println("Fechando programa");
                     break;
+
+                //Cadastro de exercicio. 
+                case 5: 
+                    System.out.println("Cadastrar novo exercicio");
+                    break;
+
                 default:
                     System.out.println("Opção inválida. Tente novamente.");
             }

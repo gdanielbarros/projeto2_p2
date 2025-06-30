@@ -1,16 +1,22 @@
 package org.upe.ui;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import org.upe.business.IndicadorBiomedico;
+import org.upe.model.Usuario;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        List<IndicadorBiomedico> indicadores = new ArrayList<>();
+        Usuario user = new Usuario(01, "LuanGameplay", "luanzito225@email.com", "batata123", "comum");
+        
         int opcao;
 
-        do {
+        do { 
             System.out.println("\n Tela Inicial ");
             System.out.println("1. Plano de Treino");
             System.out.println("2. Adicionar indicadores Biomédicos");
@@ -56,7 +62,6 @@ public class Main {
                     System.out.println("Fechando programa");
                     break;
 
-                //Cadastro de exercicio. 
                 case 5: 
                     System.out.println("Cadastrar novo exercicio");
                     break;

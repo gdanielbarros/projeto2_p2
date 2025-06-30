@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlanoTreino {
-    private List<Exercicio> exercicios;
+    private List<ExecucaoExercicio> exercicios;
 
     public PlanoTreino() {
         this.exercicios = new ArrayList<>();
     }
 
-    public void adicionarExercicio(Exercicio ex) {
+    public void adicionarExercicio(ExecucaoExercicio ex) {
         exercicios.add(ex);
     }
 
-    public List<Exercicio> getExercicios() {
+    public List<ExecucaoExercicio> getExercicios() {
         return exercicios;
     }
 
     public void atualizarExercicio(String nome, double novaCarga, int novasRepeticoes) {
-        for (Exercicio ex : exercicios) {
+        for (ExecucaoExercicio ex : exercicios) {
             if (ex.getNome().equalsIgnoreCase(nome)) {
                 ex.setCarga(novaCarga);
                 ex.setRepeticoes(novasRepeticoes);

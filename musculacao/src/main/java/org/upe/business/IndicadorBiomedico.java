@@ -1,10 +1,14 @@
 package org.upe.business;
 
 import java.util.Date;
+import org.upe.model.Usuario;
+
 
 public class IndicadorBiomedico {
+    
 
     public int id;
+    public Usuario usuario;
     public Date data;
     public double peso;
     public double altura;

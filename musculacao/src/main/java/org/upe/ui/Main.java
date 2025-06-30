@@ -27,18 +27,18 @@ public class Main {
                 case 2:
                     System.out.println("Adicionar indicadores Biomédicos: ");
                     System.out.print("Peso (KG): ");
-                    double peso = scanner.nextDouble()
+                    double peso = scanner.nextDouble();
                     System.out.print("Altura em centímetros: ");
                     double altura = scanner.nextDouble();
-                    System.out.print("Índicie de Gordura: ");
-                    double gordura = scanner.netxDouble();
-                    System.out.print("Índicie de massa magra");
-                    double massaMagra = scanner.nextDouble;
+                    System.out.print("Percentual de Gordura: ");
+                    double gordura = scanner.nextDouble();
+                    System.out.print("Percentual de massa magra");
+                    double massaMagra = scanner.nextDouble();
                     scanner.nextLine();
                 
 
                     IndicadorBiomedico novoBiomedico = new IndicadorBiomedico(
-                        indicadores.size() = 1,
+                        indicadores.size() + 1,
                         user,
                         new Date(),
                         peso,

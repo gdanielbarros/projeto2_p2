@@ -1,4 +1,4 @@
-package com.academia.model;
+package org.upe.model;
 
 public class Exercicio {
     private String nome;

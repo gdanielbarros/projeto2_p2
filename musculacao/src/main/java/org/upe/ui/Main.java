@@ -1,6 +1,9 @@
 package org.upe.ui;
 
+import java.sql.Date;
 import java.util.Scanner;
+
+import org.upe.business.IndicadorBiomedico;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,7 +13,7 @@ public class Main {
         do {
             System.out.println("\n Tela Inicial ");
             System.out.println("1. Plano de Treino");
-            System.out.println("2. Indicadores Biomédicos");
+            System.out.println("2. Adicionar indicadores Biomédicos");
             System.out.println("3. Ver Relatórios");
             System.out.println("4. Sair");
             System.out.print("Escolha uma opção: ");
@@ -22,7 +25,29 @@ public class Main {
                     System.out.println("Plano de Treino");
                     break;
                 case 2:
-                    System.out.println("Indicadores Biomédicos");
+                    System.out.println("Adicionar indicadores Biomédicos: ");
+                    System.out.print("Peso (KG): ");
+                    double peso = scanner.nextDouble()
+                    System.out.print("Altura em centímetros: ");
+                    double altura = scanner.nextDouble();
+                    System.out.print("Índicie de Gordura: ");
+                    double gordura = scanner.netxDouble();
+                    System.out.print("Índicie de massa magra");
+                    double massaMagra = scanner.nextDouble;
+                    scanner.nextLine();
+                
+
+                    IndicadorBiomedico novoBiomedico = new IndicadorBiomedico(
+                        indicadores.size() = 1,
+                        user,
+                        new Date(),
+                        peso,
+                        altura,
+                        gordura,
+                        massaMagra
+                    );
+                    indicadores.add(novoBiomedico);
+                    System.out.println("Indicadores cadastrados!");
                     break;
                 case 3:
                     System.out.println("Relatórios");

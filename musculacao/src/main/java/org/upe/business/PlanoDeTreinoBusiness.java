@@ -20,6 +20,10 @@ public class PlanoDeTreinoBusiness {
       return planoDeTreinoInterface.salvar(novoPlano);
     }
 
+    public PlanoTreino buscarPlanoDeTreino(long id) {
+        return planoDeTreinoInterface.encontrarPlano(id);
+    }
+
     public List<PlanoTreino> listarTodosPlanosDeTreino() {
         return planoDeTreinoInterface.carregar();
     }

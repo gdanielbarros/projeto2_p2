@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 
 import org.upe.model.IndicadorBiomedico;
 
-public class VerRelatorio {
+public class RelatorioUI {
 
     private SimpleDateFormat dataRelatorio = new SimpleDateFormat("dd-MM-yyyy");
 
@@ -26,6 +26,4 @@ public class VerRelatorio {
             System.out.println("IMC: " + i.imc);
         }
     }
-
-    
 }

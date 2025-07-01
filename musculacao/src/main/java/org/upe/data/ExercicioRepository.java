@@ -1,14 +1,64 @@
 package org.upe.data;
+import org.upe.interfaces.ExercicioInterface;
 import org.upe.model.Exercicio;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
-public class ExercicioRepository {
+public class ExercicioRepository implements ExercicioInterface{
     private static final String CAMINHO_ARQUIVO = "exercicios.csv";
 
-    public void salvar(List<Exercicio> exercicios) {
+    public ExercicioRepository() {
+        criarArquivo();
+    }
+
+    public void criarArquivo() {
+        try {
+            Files.createDirectories(Paths.get("data"));
+        } catch (Exception e) {
+            System.out.println("Erro criando arquivo csv " + e.getMessage());
+        }
+    }   
+
+    public String getCaminhoCsv() {
+        return CAMINHO_ARQUIVO;
+    }
+
+    @Override
+    public Exercicio salvar(Exercicio exercicio) {
+        List<Exercicio> exercicios = carregar();
+
+        long maiorId = 0;
+        for ( Exercicio exercicioDaLista : exercicios) {
+            if ( exercicioDaLista.getId() > maiorId) {
+                maiorId = exercicioDaLista.getId();
+            }
+        }
+        long novoId = maiorId + 1;
+        exercicio.setId(novoId);
+        exercicios.add(exercicio);
+
+        salvarVarios(exercicios);
+        return exercicio;
+    }
+
+    @Override
+    public Exercicio encontrarExercicio(long id) {
+        List<Exercicio> exercicios = carregar();
+
+        for ( int i = 0; i < exercicios.size(); i++ ) {
+            if (exercicios.get(i).getId() == id) {
+                return exercicios.get(i);
+            }
+        }
+
+        return null;
+    }
+    
+    public void salvarVarios(List<Exercicio> exercicios) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CAMINHO_ARQUIVO))) {
             for (Exercicio ex : exercicios) {
                 writer.write(ex.getNome() + "," + ex.getDescricao() + "," + ex.getGifPath());
@@ -30,7 +80,7 @@ public class ExercicioRepository {
             while ((linha = reader.readLine()) != null) {
                 String[] partes = linha.split(",");
                 if (partes.length == 3) {
-                    Exercicio ex = new Exercicio(partes[0], partes[1], partes[2]);
+                    Exercicio ex = new Exercicio(Long.parseLong(partes[0]), partes[1], partes[2], partes[3]);
                     exercicios.add(ex);
                 }
             }

@@ -3,6 +3,7 @@ import org.upe.model.Usuario;
 import org.upe.data.*;
 import org.upe.business.*;
 import org.upe.ui.*;
+import org.upe.util.*;
 
 import java.util.Scanner;
 
@@ -34,24 +35,27 @@ public class Main {
         PlanoDeTreinoRepository planoDeTreinoRepository = new PlanoDeTreinoRepository();
         SecaoDeTreinoRepository secaoTreinoRepository = new SecaoDeTreinoRepository(planoDeTreinoRepository);
         IndicadorBiomedicoRepository indicadorBiomedicoRepository = new IndicadorBiomedicoRepository();
-
+    
         usuarioBusiness = new UsuarioBusiness(usuarioRepository);
         exercicioBusiness = new ExercicioBusiness(exercicioRepository);
         planoDeTreinoBusiness = new PlanoDeTreinoBusiness(planoDeTreinoRepository);
         secaoTreinoBusiness = new SecaoTreinoBusiness(secaoTreinoRepository, exercicioRepository, planoDeTreinoRepository);
         indicadorBiomedicoBusiness = new IndicadorBiomedicoBusiness(indicadorBiomedicoRepository);
 
-        // Instantiate UI classes
         usuarioUI = new UsuarioUI(usuarioBusiness, inputHandler);
         exercicioUI = new ExercicioUI(exercicioBusiness, inputHandler);
         planoDeTreinoUI = new PlanoTreinoUI(planoDeTreinoBusiness, exercicioBusiness, inputHandler);
-        // SecaoTreinoUI and IndicadorBiomedicoUI need usuarioLogado.getId(), so they will be instantiated after login
 
-        // Initial setup: create an admin user if none exists
+        PopulateExercicios populateExercicios = new PopulateExercicios(exercicioBusiness);
+
         if (usuarioBusiness.listarTodosUsuarios().isEmpty()) {
             System.out.println("Nenhum usuário encontrado. Criando usuário administrador inicial...");
             usuarioBusiness.cadastrarUsuario("Admin", "admin", "admin123", true);
             System.out.println("Usuário administrador 'admin' criado com sucesso. Senha: admin123");
+        }
+
+        if (exercicioBusiness.listarTodosExercicios().isEmpty()) {
+            populateExercicios.popularExerciciosIniciaisSeNecssarios();
         }
 
         exibirMenuPrincipal();
@@ -77,7 +81,6 @@ public class Main {
                         System.out.println("Opção inválida. Tente novamente.");
                 }
             } else {
-                // Instantiate UI classes that depend on usuarioLogado.getId()
                 secaoTreinoUI = new SecaoTreinoUI(secaoTreinoBusiness, planoDeTreinoBusiness, inputHandler, usuarioLogado.getId());
                 indicadorBiomedicoUI = new IndicadorBiomedicoUI(indicadorBiomedicoBusiness, inputHandler, usuarioLogado.getId());
 

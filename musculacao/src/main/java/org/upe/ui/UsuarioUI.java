@@ -68,12 +68,11 @@ public class UsuarioUI {
     }
 
     private void atualizarUsuario() {
-        System.out.print("E-mail do usuário para atualizar: ");
-        String email = inputHandler.readLine();
-        Usuario usuario = usuarioBusiness.buscarUsuario(email);
+        System.out.print("Login do usuário para atualizar: ");
+        String login = inputHandler.readLine();
+        Usuario usuario = usuarioBusiness.buscarUsuario(login);
 
         if (usuario != null) {
-            Usuario novoUsuario = usuario;
             System.out.print("Novo nome (atual: " + usuario.getNome() + "): ");
             String nome = inputHandler.readLine();
             if (!nome.isEmpty()) usuario.setNome(nome);

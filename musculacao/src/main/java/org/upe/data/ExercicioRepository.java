@@ -31,15 +31,23 @@ public class ExercicioRepository implements ExercicioInterface{
     public Exercicio salvar(Exercicio exercicio) {
         List<Exercicio> exercicios = carregar();
 
-        long maiorId = 0;
-        for ( Exercicio exercicioDaLista : exercicios) {
-            if ( exercicioDaLista.getId() > maiorId) {
-                maiorId = exercicioDaLista.getId();
+        if (exercicio.getId() == 0) {
+            long maiorId = 0;
+            for ( Exercicio exercicioDaLista : exercicios) {
+                if ( exercicioDaLista.getId() > maiorId) {
+                    maiorId = exercicioDaLista.getId();
+                }
+            }
+            long novoId = maiorId + 1;
+            exercicio.setId(novoId);
+            exercicios.add(exercicio);
+        } else {
+            for (int i = 0; i < exercicios.size(); i++) {
+                if (exercicios.get(i).getId() == exercicio.getId()) {
+                    exercicios.set(i, exercicio);
+                }
             }
         }
-        long novoId = maiorId + 1;
-        exercicio.setId(novoId);
-        exercicios.add(exercicio);
 
         salvarVarios(exercicios);
         return exercicio;
@@ -61,7 +69,7 @@ public class ExercicioRepository implements ExercicioInterface{
     public void salvarVarios(List<Exercicio> exercicios) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CAMINHO_ARQUIVO))) {
             for (Exercicio ex : exercicios) {
-                writer.write(ex.getNome() + "," + ex.getDescricao() + "," + ex.getGifPath());
+                writer.write(ex.getId() + "," + ex.getNome() + "," + ex.getDescricao() + "," + ex.getGifPath());
                 writer.newLine();
             }
         } catch (IOException e) {
@@ -73,13 +81,16 @@ public class ExercicioRepository implements ExercicioInterface{
         List<Exercicio> exercicios = new ArrayList<>();
 
         File arquivo = new File(CAMINHO_ARQUIVO);
-        if (!arquivo.exists()) return exercicios;
+        if (!arquivo.exists()) {
+            System.out.println("Arquivo não encontrado!");
+            return exercicios;
+        } 
 
         try (BufferedReader reader = new BufferedReader(new FileReader(CAMINHO_ARQUIVO))) {
             String linha;
             while ((linha = reader.readLine()) != null) {
                 String[] partes = linha.split(",");
-                if (partes.length == 3) {
+                if (partes.length == 4) {
                     Exercicio ex = new Exercicio(Long.parseLong(partes[0]), partes[1], partes[2], partes[3]);
                     exercicios.add(ex);
                 }
@@ -87,7 +98,7 @@ public class ExercicioRepository implements ExercicioInterface{
         } catch (IOException e) {
             System.out.println("Erro ao carregar exercícios: " + e.getMessage());
         }
-
+        
         return exercicios;
     }
 }

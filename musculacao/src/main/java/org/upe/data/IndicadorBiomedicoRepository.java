@@ -42,16 +42,24 @@ public class IndicadorBiomedicoRepository implements IndicadorBiomedicoInterface
     public IndicadorBiomedico salvar(IndicadorBiomedico indicador) {
         List<IndicadorBiomedico> indicadores = carregar();
 
-        long maiorId = 0;
+        if ( indicador.getId() == 0 ) {
+            long maiorId = 0;
 
-        for ( IndicadorBiomedico indicadorBiomedico : indicadores) {
-            if (indicadorBiomedico.getId() > maiorId) {
-                maiorId = indicadorBiomedico.getId();
-            }     
+            for ( IndicadorBiomedico indicadorBiomedico : indicadores) {
+                if (indicadorBiomedico.getId() > maiorId) {
+                    maiorId = indicadorBiomedico.getId();
+                }     
+            }
+            long novoId = maiorId + 1;
+            indicador.setId(novoId);
+            indicadores.add(indicador);
+        } else {
+            for ( int i = 0; i < indicadores.size() ; i++ ) {
+                if (indicadores.get(i).getId() == indicador.getId()) {
+                    indicadores.set(i, indicador);
+                }
+            }
         }
-        long novoId = maiorId + 1;
-        indicador.setId(novoId);
-        indicadores.add(indicador);
         salvarVarios(indicadores);
         return indicador;
     }

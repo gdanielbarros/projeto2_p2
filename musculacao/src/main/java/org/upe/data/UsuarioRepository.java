@@ -36,15 +36,23 @@ public class UsuarioRepository implements UsuarioInterface {
     public Usuario salvar(Usuario usuario) {
         List<Usuario> usuarios = carregar();
 
-        long maiorId = 0;
-        for ( Usuario usuarioDaLista : usuarios) {
-            if ( usuarioDaLista.getId() > maiorId) {
-                maiorId = usuarioDaLista.getId();
+        if ( usuario.getId() == 0 ) {
+            long maiorId = 0;
+            for ( Usuario usuarioDaLista : usuarios) {
+                if ( usuarioDaLista.getId() > maiorId) {
+                    maiorId = usuarioDaLista.getId();
+                }
+            }
+            long novoId = maiorId + 1;
+            usuario.setId(novoId);
+            usuarios.add(usuario);
+        } else {
+            for ( int i = 0; i < usuarios.size() ; i++ ) {
+                if (usuarios.get(i).getId() == usuario.getId()) {
+                    usuarios.set(i, usuario);
+                }
             }
         }
-        long novoId = maiorId + 1;
-        usuario.setId(novoId);
-        usuarios.add(usuario);
         
         salvarVarios(usuarios);
         return usuario;

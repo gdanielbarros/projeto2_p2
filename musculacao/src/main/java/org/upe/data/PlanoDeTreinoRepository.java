@@ -39,15 +39,23 @@ public class PlanoDeTreinoRepository implements PlanoDeTreinoInterface {
     public PlanoTreino salvar(PlanoTreino planoTreino) {
         List<PlanoTreino> planos = carregar();
         
-        long maiorId = 0;
-        for (PlanoTreino planoTreinoExistente : planos) {
-            if (planoTreinoExistente.getId() > maiorId) {
-                maiorId = planoTreinoExistente.getId();
+        if ( planoTreino.getId() == 0 ) {
+            long maiorId = 0;
+            for (PlanoTreino planoTreinoExistente : planos) {
+                if (planoTreinoExistente.getId() > maiorId) {
+                    maiorId = planoTreinoExistente.getId();
+                }
+            }
+            long novoId = maiorId + 1;
+            planoTreino.setId(novoId);
+            planos.add(planoTreino);
+        } else {
+            for ( int i = 0; i < planos.size() ; i++ ) {
+                if (planos.get(i).getId() == planoTreino.getId()) {
+                    planos.set(i, planoTreino);
+                }
             }
         }
-        long novoId = maiorId + 1;
-        planoTreino.setId(novoId);
-        planos.add(planoTreino);
         salvarVarios(planos);
         return planoTreino;
     }

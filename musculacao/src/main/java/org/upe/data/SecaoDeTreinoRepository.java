@@ -44,16 +44,25 @@ public class SecaoDeTreinoRepository implements SecaoDeTreinoInterface {
     public SecaoTreino salvar(SecaoTreino secaoTreino) {
         List<SecaoTreino> secoes = carregar();
 
-        long maiorId = 0;
+        if (secaoTreino.getId() == 0) {
+            long maiorId = 0;
 
-        for ( SecaoTreino secao : secoes ) {
-          if (secao.getId() > maiorId) { 
-            maiorId = secao.getId();
-          }
+            for ( SecaoTreino secao : secoes ) {
+            if (secao.getId() > maiorId) { 
+                maiorId = secao.getId();
+            }
+            }
+            long novoId = maiorId + 1;
+            secaoTreino.setId(novoId);
+            secoes.add(secaoTreino);
+        } else {
+            for (int i = 0; i < secoes.size(); i++) {
+                if (secoes.get(i).getId() == secaoTreino.getId()) {
+                    secoes.set(i, secaoTreino);
+                }
+            }
         }
-        long novoId = maiorId + 1;
-        secaoTreino.setId(novoId);
-        secoes.add(secaoTreino);
+
         salvarVarios(secoes);
         return secaoTreino;
     }

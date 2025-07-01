@@ -68,8 +68,7 @@ public class PlanoTreinoUI {
         planoDeTreinoBusiness.listarTodosPlanosDeTreino().forEach(p -> {
             Exercicio exercicioOpt = exercicioBusiness.buscarExercicioPorId(p.getExercicioId());
             String nomeExercicio = exercicioOpt.getNome();
-            System.out.println(String.format("ID: %d, Exercício: %s (ID: %d), Séries: %d, Repetições: %d, Carga: %.2f kg",
-                    p.getId(), nomeExercicio, p.getExercicioId(), p.getSeries(), p.getRepeticoes(), p.getCarga()));
+            System.out.println("ID: " + p.getId() + ", " + "Exercício: " + nomeExercicio + ", " + "(ID: " + p.getExercicioId() + "), " + "Séries: " + p.getSeries() + ", " + "Repetições: " + p.getRepeticoes() + ", " + " Carga: " + p.getCarga() + "kg");
         });
     }
 

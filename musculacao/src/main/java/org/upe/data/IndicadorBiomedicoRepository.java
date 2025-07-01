@@ -71,21 +71,40 @@ public class IndicadorBiomedicoRepository implements IndicadorBiomedicoInterface
         return indicadoresDoUsuario;
     }
 
-    private List<IndicadorBiomedico> carregar() {
+    @Override
+    public List<IndicadorBiomedico> encontrarPorData(long usuarioId, LocalDate comeco, LocalDate fim) {
+        List<IndicadorBiomedico> indicadores = carregar();
+
+        List<IndicadorBiomedico> resposta = new ArrayList<IndicadorBiomedico>();
+
+        for ( IndicadorBiomedico indicador : indicadores) {
+            if (indicador.getUsuarioId() == usuarioId) {
+                if ( indicador.getData().isBefore(fim) && indicador.getData().isAfter(comeco) ) {
+                    resposta.add(indicador);
+                }
+            }
+        }
+
+        return resposta;
+    }
+
+    @Override
+    public List<IndicadorBiomedico> carregar() {
         List<IndicadorBiomedico> indicadores = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(CAMINHO_ARQUIVO))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] record = line.split(",");
-                if (record.length == 7) { 
+                String[] partes = line.split(",");
+                if (partes.length == 7) { 
                     indicadores.add(new IndicadorBiomedico(
-                            Long.parseLong(record[0]),
-                            Long.parseLong(record[1]),
-                            LocalDate.parse(record[2], DATE_FORMATTER),
-                            Double.parseDouble(record[3]),
-                            Double.parseDouble(record[4]),
-                            Double.parseDouble(record[5]),
-                            Double.parseDouble(record[6])
+                            Long.parseLong(partes[0]),
+                            Long.parseLong(partes[1]),
+                            LocalDate.parse(partes[2], DATE_FORMATTER),
+                            Double.parseDouble(partes[3]),
+                            Double.parseDouble(partes[4]),
+                            Double.parseDouble(partes[5]),
+                            Double.parseDouble(partes[6]),
+                            Double.parseDouble(partes[7])
                     ));
                 }
             }

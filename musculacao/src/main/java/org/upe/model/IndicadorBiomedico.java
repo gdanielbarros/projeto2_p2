@@ -13,7 +13,7 @@ public class IndicadorBiomedico {
     private double percentualMassaMagra;
     private double imc;
 
-    public IndicadorBiomedico(long id, long usuarioId, LocalDate data, double peso, double altura, double gordura, double massaMagra){
+    public IndicadorBiomedico(long id, long usuarioId, LocalDate data, double peso, double altura, double gordura, double massaMagra, double imc){
         this.id =id;
         this.usuarioId = usuarioId;
         this.data = data;
@@ -21,11 +21,7 @@ public class IndicadorBiomedico {
         this.altura = altura;
         this.percentualGordura = gordura;
         this.percentualMassaMagra = massaMagra;
-        this.imc = calcularIMC(peso, altura);
-    }
-
-    private double calcularIMC(double peso, double altura){
-        return peso/(altura*altura);
+        this.imc = imc;
     }
 
     public long getId() {

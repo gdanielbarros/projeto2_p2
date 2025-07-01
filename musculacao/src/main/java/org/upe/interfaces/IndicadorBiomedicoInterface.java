@@ -11,4 +11,5 @@ public interface IndicadorBiomedicoInterface {
     List<IndicadorBiomedico> encontrarPeloUsuario(long id);
     List<IndicadorBiomedico> carregar();
     List<IndicadorBiomedico> encontrarPorData(long UsuarioId, LocalDate comeco, LocalDate fim);
+    IndicadorBiomedico buscarPorId(long id);
 }

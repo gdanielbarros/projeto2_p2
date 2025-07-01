@@ -98,4 +98,8 @@ public class IndicadorBiomedicoBusiness {
         }
         return importedCount;
     }
+
+    public IndicadorBiomedico buscarIndicadorBiomedico(long id) {
+        return indicadorBiomedicoInterface.buscarPorId(id);
+    }
 }

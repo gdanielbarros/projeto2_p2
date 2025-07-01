@@ -114,7 +114,18 @@ public class IndicadorBiomedicoRepository implements IndicadorBiomedicoInterface
         return indicadores;
     }
 
+    @Override
+    public IndicadorBiomedico buscarPorId(long id) {
+        List<IndicadorBiomedico> indicadores = carregar();
 
+        for ( IndicadorBiomedico indicador : indicadores ) {
+            if ( indicador.getId() == id) {
+                return indicador;
+            }
+        }
+
+        return null;
+    }
     private void salvarVarios(List<IndicadorBiomedico> indicadores) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CAMINHO_ARQUIVO))) {
             for (IndicadorBiomedico indicador : indicadores) {

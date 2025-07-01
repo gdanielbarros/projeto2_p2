@@ -17,7 +17,7 @@ public class SecaoTreinoBusiness {
     private ExercicioInterface exercicioInterface;
     private PlanoDeTreinoInterface planoDeTreinoInterface;
 
-    public SecaoTreinoBusiness(SecaoTreinoBusiness secaoTreinoRepository, ExercicioInterface exercicioInterface, PlanoDeTreinoInterface planoDeTreinoRepository) {
+    public SecaoTreinoBusiness(SecaoDeTreinoInterface secaoTreinoInterface, ExercicioInterface exercicioInterface, PlanoDeTreinoInterface planoDeTreinoInterface) {
         this.secaoTreinoInterface = secaoTreinoInterface;
         this.exercicioInterface = exercicioInterface;
         this.planoDeTreinoInterface = planoDeTreinoInterface;
@@ -64,5 +64,9 @@ public class SecaoTreinoBusiness {
             return planoDeTreinoInterface.salvar(planoOriginal);
         }
         return planoOriginal;
+    }
+
+    public SecaoTreino buscarSecaoTreino(long id) {
+        return secaoTreinoInterface.encontrarTreino(id);
     }
 }

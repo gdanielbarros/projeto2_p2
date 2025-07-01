@@ -104,6 +104,19 @@ public class SecaoDeTreinoRepository implements SecaoDeTreinoInterface {
         return secoes;
     }
 
+    @Override
+    public SecaoTreino encontrarTreino(long id) {
+        List<SecaoTreino> secoes = carregar();
+
+        for ( SecaoTreino secao : secoes ) {
+            if ( secao.getId() == id ) {
+                return secao;
+            }
+        }
+
+        return null;
+    }
+
     private void salvarVarios(List<SecaoTreino> secoes) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CAMINHO_ARQUIVO))) {
             for (SecaoTreino secao : secoes) {

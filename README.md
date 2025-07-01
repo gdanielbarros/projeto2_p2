@@ -7,7 +7,7 @@ Projeto desenvolvido para construção de um sistema de gerenciamento da evoluç
 
 - **Vinicius Menezes de Queiroz**  
 - **Ruan Galvão**  
-- **Daniel Alves (Dneutron)**  
+- **Daniel Alves**  
 - **Thalisson Matias**  
 - **Rodrigo César**  
 

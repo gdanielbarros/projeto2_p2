@@ -5,14 +5,7 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-<<<<<<< HEAD
-
-
 import org.upe.model.IndicadorBiomedico;
-=======
-import org.upe.model.Exercicio;
-import org.upe.business.IndicadorBiomedico;
->>>>>>> eee326b2a913c37d9c8e6278b53a4115850bea5b
 import org.upe.model.Usuario;
 import org.upe.ui.VerRelatorio;
 

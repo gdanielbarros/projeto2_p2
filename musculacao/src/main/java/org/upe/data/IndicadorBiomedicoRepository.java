@@ -45,8 +45,8 @@ public class IndicadorBiomedicoRepository implements IndicadorBiomedicoInterface
         long maiorId = 0;
 
         for ( IndicadorBiomedico indicadorBiomedico : indicadores) {
-            if (indicador.getId() > maiorId) {
-                maiorId = indicador.getId();
+            if (indicadorBiomedico.getId() > maiorId) {
+                maiorId = indicadorBiomedico.getId();
             }     
         }
         long novoId = maiorId + 1;

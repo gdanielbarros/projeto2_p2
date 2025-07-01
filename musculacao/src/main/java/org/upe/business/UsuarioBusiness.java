@@ -47,4 +47,8 @@ public class UsuarioBusiness {
     public boolean isAdmin(Usuario usuario) {
         return usuario.getAdmin();
     }
+
+    public Usuario buscarUsuario(String email) {
+        return usuarioInterface.encontrarUsuario(email);
+    }
 }

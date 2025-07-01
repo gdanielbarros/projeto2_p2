@@ -41,7 +41,6 @@ public class UsuarioBusiness {
     }
 
     public Usuario atualizarUsuario(Usuario usuario) {
-        // Poderíamos adicionar mais validações aqui, como verificar se o ID existe
         return usuarioInterface.salvar(usuario);
     }
 
